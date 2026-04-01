@@ -1,0 +1,121 @@
+.footer {
+  background: var(--bg-dark-elevated);
+  padding: 5rem 3.5rem 2.5rem;
+  border-top: 1px solid rgba(207, 157, 123, 0.08);
+}
+
+.inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ========== Top ========== */
+.top {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(207, 157, 123, 0.08);
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-white);
+  letter-spacing: -0.02em;
+}
+
+.brandDesc {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 280px;
+}
+
+/* Columns */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.columnTitle {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 0.5rem;
+}
+
+.link {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--text-white);
+}
+
+/* ========== Bottom ========== */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.copy {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.bottomLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.bottomLink {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.bottomLink:hover {
+  color: var(--text-muted);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .footer { padding: 3rem 1.5rem 2rem; }
+  .top { grid-template-columns: 1fr; gap: 2.5rem; }
+  .columns { grid-template-columns: 1fr; gap: 2rem; }
+  .bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .bottomLinks { flex-direction: column; gap: 0.5rem; }
+}

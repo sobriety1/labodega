@@ -1,0 +1,81 @@
+/* Logo — fixed, always visible */
+.logoWrap {
+  position: absolute;
+  top: 15;
+  left: 2.5rem;
+  z-index: 101;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  margin-left: -4.2rem;
+}
+
+.logoImg {
+  height: 300px;
+  width: auto;
+  display: flex;
+}
+
+/* Nav — scrolls with page */
+.nav {
+  position: fixed;
+  top: 10;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 3.5rem;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.link {
+  /* Было 0.8125rem (13px), ставим чуть крупнее */
+  font-size: 0.95rem; 
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 12px 28px; 
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-body);
+  letter-spacing: -0.01em;
+}
+
+.link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.primary {
+  background: rgba(207, 157, 123, 0.35);
+  color: var(--text-white);
+  font-weight: 500;
+  border: 1px solid rgba(207, 157, 123, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.primary:hover {
+  background: rgba(207, 157, 123, 0.5);
+  border-color: rgba(207, 157, 123, 0.45);
+}
+
+@media (max-width: 768px) {
+  .logoWrap { left: 1.5rem; }
+  .nav { padding: 0 1.5rem; height: 64px; }
+  .links { gap: 4px; }
+  .link { padding: 6px 12px; font-size: 0.75rem; }
+}
