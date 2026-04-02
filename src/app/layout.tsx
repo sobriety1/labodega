@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.jpg', // Не забудь положить сюда сочный рендер, если есть
+        url: '/og-image.jpg', 
         width: 1200,
         height: 630,
         alt: 'LA BODEGA Architecture',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: '/favicon.ico', // Убедись, что сменил логотип Next.js на свой
+    icon: '/favicon.ico', 
   },
 };
 
@@ -31,10 +31,9 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        {/* Добавляем темную тему для прелоадера браузеров, чтобы не было белой вспышки */}
         <meta name="theme-color" content="#000000" />
       </head>
-      <body style={{ backgroundColor: '#000000' }}>
+      <body>
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

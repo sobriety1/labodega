@@ -36,7 +36,7 @@ export default function Directions() {
         {directions.map((d) => (
           <Link key={d.title} href={d.href} className={styles.card}>
             <div className={styles.cardImage}>
-              <img src={d.image} alt={d.title} />
+              <img src={d.image} alt={d.title} loading="lazy" />
               <div className={styles.cardOverlay} />
             </div>
             <div className={styles.cardContent}>

@@ -2,7 +2,7 @@ import styles from './About.module.css';
 
 export default function About() {
   return (
-    <section className={styles.section}>
+    <section id="about" className={styles.section}>
       <div className={styles.inner}>
         <div className={styles.textSide}>
           <span className={styles.eyebrow}>О компании</span>
@@ -38,7 +38,7 @@ export default function About() {
         </div>
 
         <div className={styles.imageSide}>
-          <img src="/about.jpg" alt="Команда на производстве" />
+          <img src="/about.jpg" alt="Команда на производстве" loading="lazy" />
         </div>
       </div>
     </section>

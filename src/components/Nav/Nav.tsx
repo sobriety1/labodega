@@ -33,6 +33,12 @@ export default function Nav({ onContactClick }: NavProps) {
     };
   }, [menuOpen]);
 
+  const scrollTo = (id: string) => {
+    setMenuOpen(false);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <>
       <div className={styles.logoWrap}>
@@ -66,9 +72,9 @@ export default function Nav({ onContactClick }: NavProps) {
               ✕
             </button>
             <nav className={styles.mobileNav}>
-              <a href="#" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>Проекты</a>
-              <a href="#" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>Как мы строим</a>
-              <a href="#" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>О компании</a>
+              <a href="#projects" className={styles.mobileLink} onClick={(e) => { e.preventDefault(); scrollTo('projects'); }}>Проекты</a>
+              <a href="#process" className={styles.mobileLink} onClick={(e) => { e.preventDefault(); scrollTo('process'); }}>Как мы строим</a>
+              <a href="#about" className={styles.mobileLink} onClick={(e) => { e.preventDefault(); scrollTo('about'); }}>О компании</a>
             </nav>
             <button
               className={styles.mobileCtaBottom}
@@ -81,9 +87,9 @@ export default function Nav({ onContactClick }: NavProps) {
       ) : (
         <nav className={styles.nav}>
           <div className={styles.links}>
-            <button className={styles.link}>Проекты</button>
-            <button className={styles.link}>Как мы строим</button>
-            <button className={styles.link}>О компании</button>
+            <button className={styles.link} onClick={() => scrollTo('projects')}>Проекты</button>
+            <button className={styles.link} onClick={() => scrollTo('process')}>Как мы строим</button>
+            <button className={styles.link} onClick={() => scrollTo('about')}>О компании</button>
             <button
               className={`${styles.link} ${styles.primary}`}
               onClick={onContactClick}

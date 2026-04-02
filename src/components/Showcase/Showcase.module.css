@@ -26,6 +26,7 @@
   overflow: hidden;
   will-change: clip-path;
   z-index: 2;
+  transform: translateZ(0);
 }
 
 .imageWrap img {

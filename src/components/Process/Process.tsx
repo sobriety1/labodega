@@ -34,6 +34,7 @@ const steps = [
 export default function Process() {
   const [active, setActive] = useState(0);
   const outerRef = useRef<HTMLDivElement>(null);
+  const activeRef = useRef(0);
 
  useEffect(() => {
     let rafId: number;
@@ -50,7 +51,10 @@ export default function Process() {
           steps.length - 1,
           Math.floor(progress * steps.length)
         );
-        setActive(newActive);
+        if (newActive !== activeRef.current) {
+          activeRef.current = newActive;
+          setActive(newActive);
+        }
       });
     };
 
@@ -63,7 +67,7 @@ export default function Process() {
   }, []);
 
   return (
-    <>
+    <section id="process">
       <h2 className={styles.heading}>
         Оптимизированный процесс.
         <br />
@@ -94,13 +98,13 @@ export default function Process() {
                   key={i}
                   className={`${styles.image} ${active === i ? styles.imageActive : ''}`}
                 >
-                  <img src={step.image} alt={step.label} />
+                  <img src={step.image} alt={step.label} loading="lazy" />
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 }

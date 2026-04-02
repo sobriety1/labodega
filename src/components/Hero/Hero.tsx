@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import styles from './Hero.module.css';
 
 interface HeroProps {
@@ -7,10 +8,33 @@ interface HeroProps {
 }
 
 export default function Hero({ onContactClick }: HeroProps) {
+  const heroRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    const video = videoRef.current;
+    if (!hero || !video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.hero}>
+    <section ref={heroRef} className={styles.hero}>
       <div className={styles.videoBg}>
-        <video autoPlay muted loop playsInline preload="auto" className={styles.video}>
+        <video ref={videoRef} autoPlay muted loop playsInline preload="auto" className={styles.video}>
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
       </div>

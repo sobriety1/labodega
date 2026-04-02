@@ -5,7 +5,8 @@ import styles from './Showcase.module.css';
 
 export default function Showcase() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const textLeftRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -17,30 +18,41 @@ export default function Showcase() {
 
   useEffect(() => {
     if (isMobile) return;
+
+    let rafId: number;
     const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const scrollable = sectionRef.current.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      const p = Math.max(0, Math.min(1, -rect.top / scrollable));
-      setProgress(p);
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        if (!sectionRef.current || !imageRef.current || !textLeftRef.current) return;
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollable = sectionRef.current.offsetHeight - window.innerHeight;
+        if (scrollable <= 0) return;
+
+        const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+
+        // Update DOM directly — no React re-render
+        const clipRight = 100 - (progress * 50 + 50);
+        const clipLeft = progress * 50;
+        imageRef.current.style.clipPath = `inset(0 ${clipRight}% 0 ${clipLeft}%)`;
+
+        const leftOpacity = Math.max(0, (progress - 0.4) * 2.5);
+        const leftY = Math.max(0, (1 - leftOpacity) * 30);
+        textLeftRef.current.style.opacity = String(leftOpacity);
+        textLeftRef.current.style.transform = `translateY(${leftY}px)`;
+      });
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, [isMobile]);
 
-  // Image slides from left (0%) to right (50%)
-  const imageX = progress * 50;
-  // Right text fades out in first half
-  const rightOpacity = Math.max(0, 1 - progress * 3);
-  // Left text fades in in second half
-  const leftOpacity = Math.max(0, (progress - 0.4) * 2.5);
-  const leftY = Math.max(0, (1 - leftOpacity) * 30);
-
-   if (isMobile) {
+  if (isMobile) {
     return (
-      <section className={styles.mobileSection}>
+      <section id="projects" className={styles.mobileSection}>
         <div className={styles.mobileTextTop}>
           <h2 className={styles.title}>Строительство, превосходящее ожидания.</h2>
         </div>
@@ -59,28 +71,27 @@ export default function Showcase() {
   }
 
   return (
-    <div className={styles.outer} ref={sectionRef}>
+    <div id="projects" className={styles.outer} ref={sectionRef}>
       <div className={styles.sticky}>
-       {/* Image */}
+        {/* Image */}
         <div
+          ref={imageRef}
           className={styles.imageWrap}
-          style={{ clipPath: `inset(0 ${100 - (progress * 50 + 50)}% 0 ${progress * 50}%)` }}
+          style={{ clipPath: 'inset(0 50% 0 0%)' }}
         >
           <img src="/showcase.jpg" alt="Интерьер модульного дома" />
         </div>
 
-         {/* Right text — stays under image */}
+        {/* Right text — stays under image */}
         <div className={styles.textRight}>
           <h2 className={styles.title}>Строительство, <br />превосходящее ожидания.</h2>
         </div>
 
         {/* Left text — fades in */}
         <div
+          ref={textLeftRef}
           className={styles.textLeft}
-          style={{
-            opacity: leftOpacity,
-            transform: `translateY(${leftY}px)`,
-          }}
+          style={{ opacity: 0, transform: 'translateY(30px)' }}
         >
           <h2 className={styles.title}>Современный дизайн<br />без компромиссов.</h2>
           <p className={styles.description}>
