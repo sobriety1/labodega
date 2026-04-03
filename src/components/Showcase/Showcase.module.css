@@ -24,9 +24,29 @@
   bottom: 0;
   border-radius: 20px;
   overflow: hidden;
-  will-change: clip-path;
   z-index: 2;
-  transform: translateZ(0);
+  transform: translateZ(0); 
+  pointer-events: none;
+}
+
+.imageWindow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: hidden;
+  will-change: transform;
+  pointer-events: auto;
+}
+
+.imageInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  will-change: transform;
 }
 
 

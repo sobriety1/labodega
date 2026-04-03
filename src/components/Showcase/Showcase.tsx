@@ -7,6 +7,7 @@ import styles from './Showcase.module.css';
 
 export default function Showcase() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const windowRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const textLeftRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -25,17 +26,19 @@ export default function Showcase() {
     const handleScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        if (!sectionRef.current || !imageRef.current || !textLeftRef.current) return;
+        if (!sectionRef.current || !windowRef.current || !imageRef.current || !textLeftRef.current) return;
         const rect = sectionRef.current.getBoundingClientRect();
         const scrollable = sectionRef.current.offsetHeight - window.innerHeight;
         if (scrollable <= 0) return;
 
         const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
 
-        // Update DOM directly — no React re-render
-        const clipRight = 100 - (progress * 50 + 50);
-        const clipLeft = progress * 50;
-        imageRef.current.style.clipPath = `inset(0 ${clipRight}% 0 ${clipLeft}%)`;
+        // Update DOM directly — using hardware-accelerated transform instead of clip-path
+        const windowTranslate = progress * 100;
+        const imageTranslate = -(progress * 50);
+        
+        windowRef.current.style.transform = `translate3d(${windowTranslate}%, 0, 0)`;
+        imageRef.current.style.transform = `translate3d(${imageTranslate}%, 0, 0)`;
 
         const leftOpacity = Math.max(0, (progress - 0.4) * 2.5);
         const leftY = Math.max(0, (1 - leftOpacity) * 30);
@@ -77,12 +80,15 @@ export default function Showcase() {
     <div id="projects" className={styles.outer} ref={sectionRef}>
       <div className={styles.sticky}>
         {/* Image */}
-        <div
-          ref={imageRef}
-          className={styles.imageWrap}
-          style={{ clipPath: 'inset(0 50% 0 0%)' }}
-        >
-          <Image src="/showcase.jpg" alt="Интерьер модульного дома" fill sizes="100vw" style={{ objectFit: 'cover' }} />
+        <div className={styles.imageWrap}>
+          <div 
+            ref={windowRef} 
+            className={styles.imageWindow}
+          >
+            <div ref={imageRef} className={styles.imageInner}>
+              <Image src="/showcase.jpg" alt="Интерьер модульного дома" fill sizes="100vw" style={{ objectFit: 'cover' }} />
+            </div>
+          </div>
         </div>
 
         {/* Right text — stays under image */}
