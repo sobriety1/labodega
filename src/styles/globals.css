@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
 
 :root {
   --bg-dark: #0C1519;
@@ -12,8 +11,8 @@
   --accent-coffee: #724B39;
   --border-subtle: rgba(207, 157, 123, 0.1);
   --border-medium: rgba(207, 157, 123, 0.2);
-  --font-display: 'Prata', Georgia, serif;
-  --font-body: 'Prata', Georgia, serif;
+  --font-display: var(--font-prata), Georgia, serif;
+  --font-body: var(--font-prata), Georgia, serif;
 }
 
 *, *::before, *::after {

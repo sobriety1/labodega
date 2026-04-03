@@ -1,6 +1,14 @@
 import type { Metadata } from 'next';
+import { Prata } from 'next/font/google';
 import '@/styles/globals.css';
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll';
+
+const prata = Prata({
+  weight: '400',
+  subsets: ['cyrillic', 'latin'],
+  variable: '--font-prata',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'LA BODEGA — Архитектурное бюро | Проектирование и реализация',
@@ -29,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={prata.variable}>
       <head>
         <meta name="theme-color" content="#000000" />
       </head>
