@@ -29,12 +29,8 @@
   transform: translateZ(0);
 }
 
-.imageWrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+
+
 
 /* ========== Right text — sits under image ========== */
 .textRight {

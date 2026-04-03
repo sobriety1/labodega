@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import styles from './About.module.css';
+
 
 export default function About() {
   return (
@@ -38,7 +40,7 @@ export default function About() {
         </div>
 
         <div className={styles.imageSide}>
-          <img src="/about.jpg" alt="Команда на производстве" loading="lazy" />
+          <Image src="/about.jpg" alt="Команда на производстве" fill sizes="(max-width: 768px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
         </div>
       </div>
     </section>

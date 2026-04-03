@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Directions.module.css';
+
 
 const directions = [
   {
@@ -36,7 +38,8 @@ export default function Directions() {
         {directions.map((d) => (
           <Link key={d.title} href={d.href} className={styles.card}>
             <div className={styles.cardImage}>
-              <img src={d.image} alt={d.title} loading="lazy" />
+              <Image src={d.image} alt={d.title} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'cover', transition: 'transform 0.6s ease' }} />
+
               <div className={styles.cardOverlay} />
             </div>
             <div className={styles.cardContent}>

@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+
 import styles from './Process.module.css';
 
 const steps = [
@@ -98,7 +100,7 @@ export default function Process() {
                   key={i}
                   className={`${styles.image} ${active === i ? styles.imageActive : ''}`}
                 >
-                  <img src={step.image} alt={step.label} loading="lazy" />
+                  <Image src={step.image} alt={step.label} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
                 </div>
               ))}
             </div>

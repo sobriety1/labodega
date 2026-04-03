@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+
 import styles from './Showcase.module.css';
 
 export default function Showcase() {
@@ -56,7 +58,8 @@ export default function Showcase() {
         <div className={styles.mobileTextTop}>
           <h2 className={styles.title}>Строительство, превосходящее ожидания.</h2>
         </div>
-        <img src="/showcase.jpg" alt="Интерьер" className={styles.mobileImage} />
+        <Image src="/showcase.jpg" alt="Интерьер" width={1200} height={800} className={styles.mobileImage} sizes="100vw" />
+
         <div className={styles.mobileTextBottom}>
           <h2 className={styles.title}>Современный дизайн<br />без компромиссов.</h2>
           <p className={styles.description}>
@@ -79,7 +82,7 @@ export default function Showcase() {
           className={styles.imageWrap}
           style={{ clipPath: 'inset(0 50% 0 0%)' }}
         >
-          <img src="/showcase.jpg" alt="Интерьер модульного дома" />
+          <Image src="/showcase.jpg" alt="Интерьер модульного дома" fill sizes="100vw" style={{ objectFit: 'cover' }} />
         </div>
 
         {/* Right text — stays under image */}
